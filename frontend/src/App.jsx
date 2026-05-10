@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 function App() {
   // State for Upload Section
   const [files, setFiles] = useState([]);
@@ -36,7 +38,7 @@ function App() {
     setUploadStatus('');
 
     try {
-      const response = await axios.post('http://localhost:5001/api/upload', formData, {
+      const response = await axios.post(`${API_URL}/api/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       
@@ -63,7 +65,7 @@ function App() {
     setAnswer('');
 
     try {
-      const response = await axios.post('http://localhost:5001/api/ask', {
+      const response = await axios.post(`${API_URL}/api/ask`, {
         question: question,
       });
       setAnswer(response.data.answer);
