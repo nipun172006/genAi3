@@ -1,0 +1,357 @@
+/* 
+  NotebookLM Premium Clone CSS
+  Dark Theme, Glassmorphism, and Smooth Animations
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-dark: #121214;
+  --sidebar-bg: #1a1a1d;
+  --card-bg: #222226;
+  --accent: #6b4cff;
+  --accent-hover: #5638e3;
+  --text-main: #f0f0f0;
+  --text-muted: #a0a0a5;
+  --border: #2d2d33;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Layout */
+.notebook-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 320px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.sidebar-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  background: linear-gradient(90deg, #fff, #a0a0a5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.upload-container {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+}
+
+.upload-container h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.file-upload-wrapper {
+  display: block;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.file-upload-wrapper input[type="file"] {
+  display: none;
+}
+
+.upload-box {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.upload-box:hover {
+  border-color: var(--accent);
+  background: rgba(107, 76, 255, 0.05);
+}
+
+.upload-icon {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.btn-upload {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-upload:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btn-upload:disabled {
+  background-color: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.status-text {
+  font-size: 13px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.status-text.success {
+  color: #4ade80;
+}
+
+.status-text.error {
+  color: #f87171;
+}
+
+/* Sources List */
+.sources-list-container h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.empty-sources {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.sources-list {
+  list-style: none;
+}
+
+.source-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease;
+}
+
+.source-item:hover {
+  transform: translateX(4px);
+  border-color: #3d3d45;
+}
+
+.source-icon {
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.source-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.source-name {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source-size {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* --- MAIN CHAT AREA --- */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  position: relative;
+}
+
+.chat-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-screen {
+  margin-top: 10vh;
+  text-align: center;
+  max-width: 500px;
+}
+
+.welcome-screen h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.welcome-screen p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.message.ai-message {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.3s ease forwards;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+
+.ai-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.message-body {
+  line-height: 1.8;
+  font-size: 17px;
+  white-space: pre-wrap;
+  color: #ffffff;
+}
+
+/* Input Area */
+.input-container {
+  padding: 24px 40px;
+  background: linear-gradient(to top, var(--bg-dark) 80%, transparent);
+}
+
+.input-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  color: var(--text-main);
+  font-size: 15px;
+  outline: none;
+}
+
+.input-wrapper input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-ask {
+  padding: 0 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ask:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btn-ask:disabled {
+  background-color: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #404046;
+}

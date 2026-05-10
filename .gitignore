@@ -1,0 +1,33 @@
+# .gitignore for genAi3 RAG Project
+
+# Dependencies
+node_modules/
+
+# Environment variables — NEVER commit these!
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/
+
+# Uploaded PDFs (temp files)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test/debug files
+backend/test.js
+backend/test2.js
+backend/testGroq.js
+backend/dummy.pdf
+backend/test.pdf
+backend/server.log
