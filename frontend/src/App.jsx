@@ -82,7 +82,7 @@ function App() {
       {/* Sidebar for Sources */}
       <aside className="sidebar">
         <div className="sidebar-header">
-          <h2>NotebookLM Clone</h2>
+          <h2>My NotebookLM</h2>
         </div>
 
         <div className="upload-container">
@@ -150,7 +150,7 @@ function App() {
             </div>
           ) : (
             <div className="welcome-screen">
-              <h1>Welcome to your Notebook</h1>
+              <h1>Welcome to My NotebookLM</h1>
               <p>Upload your documents on the left, then ask questions below to extract insights.</p>
             </div>
           )}
