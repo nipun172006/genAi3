@@ -5,6 +5,7 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { parsePDF } from './utils/pdfParser.js';
+import { parseCSV } from './utils/csvParser.js';
 import { chunkDocuments } from './utils/chunker.js';
 import { storeInQdrant } from './utils/vectorStore.js';
 import { retrieveRelevantChunks } from './utils/retriever.js';
@@ -39,12 +40,19 @@ const storage = multer.diskStorage({
   }
 });
 
-// File filter to only allow PDFs
+// File filter to allow both PDFs and CSVs
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'application/pdf') {
+  const allowedTypes = [
+    'application/pdf',
+    'text/csv',
+    'application/vnd.ms-excel', // some systems send CSV with this type
+    'text/plain',               // fallback for .csv files
+  ];
+  const isCSV = file.originalname.toLowerCase().endsWith('.csv');
+  if (allowedTypes.includes(file.mimetype) || isCSV) {
     cb(null, true);
   } else {
-    cb(new Error('Only PDF files are allowed!'), false);
+    cb(new Error('Only PDF and CSV files are allowed!'), false);
   }
 };
 
@@ -71,15 +79,22 @@ app.post('/api/upload', upload.array('documents', 25), async (req, res) => {
     let allDocs = [];
     let uploadedFilesData = [];
 
-    // Process each uploaded PDF
+    // Process each uploaded file (PDF or CSV)
     for (const file of req.files) {
-      // 1. Parse it
-      const docs = await parsePDF(file.path);
+      let docs;
+      const isCSV = file.originalname.toLowerCase().endsWith('.csv');
+
+      if (isCSV) {
+        docs = await parseCSV(file.path);
+      } else {
+        docs = await parsePDF(file.path);
+      }
+
       allDocs.push(...docs);
-      
       uploadedFilesData.push({
         filename: file.originalname,
-        size: file.size
+        size: file.size,
+        type: isCSV ? 'csv' : 'pdf',
       });
     }
 

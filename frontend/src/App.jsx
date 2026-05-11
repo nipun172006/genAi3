@@ -87,18 +87,18 @@ function App() {
 
         <div className="upload-container">
           <h3>Add Sources</h3>
-          <p className="subtitle">Upload PDFs to chat with them</p>
+          <p className="subtitle">Upload PDFs or CSVs to chat with them</p>
           
           <label className="file-upload-wrapper">
             <input 
               type="file" 
               multiple 
-              accept="application/pdf" 
+              accept="application/pdf,.csv"
               onChange={handleFileChange} 
             />
             <div className="upload-box">
               <span className="upload-icon">📄</span>
-              <span>{files.length > 0 ? `${files.length} file(s) selected` : 'Select PDFs'}</span>
+              <span>{files.length > 0 ? `${files.length} file(s) selected` : 'Select PDFs or CSVs'}</span>
             </div>
           </label>
 
@@ -125,7 +125,7 @@ function App() {
             <ul className="sources-list">
               {uploadedDocs.map((doc, index) => (
                 <li key={index} className="source-item">
-                  <span className="source-icon">📌</span>
+                  <span className="source-icon">{doc.type === 'csv' ? '📊' : '📌'}</span>
                   <div className="source-info">
                     <span className="source-name">{doc.filename}</span>
                     <span className="source-size">{(doc.size / 1024 / 1024).toFixed(2)} MB</span>
